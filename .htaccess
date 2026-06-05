@@ -1,0 +1,16 @@
+# Disable directory browsing
+Options -Indexes
+
+# Set default index
+DirectoryIndex index.php
+
+# Prevent accessing sensitive files
+<FilesMatch "\.(sql|env|ini|log|sh)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Optional: Force HTTPS (Uncomment if you have an SSL certificate)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

@@ -1,0 +1,10 @@
+# Ignore user uploaded files
+assets/uploads/*
+!assets/uploads/default.png
+!assets/uploads/index.html
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+
+# Ignore local config overrides if added in future
