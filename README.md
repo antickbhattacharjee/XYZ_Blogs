@@ -14,8 +14,8 @@ XYZ Blogs is a complete, custom-built Content Management System (CMS) and bloggi
 
 ## Technologies Used
 
-- **Backend:** PHP 8+
-- **Database:** MySQL / MariaDB (MySQLi extension)
+- **Backend:** PHP 8+ (PDO Extension)
+- **Database:** PostgreSQL
 - **Frontend:** HTML5, CSS3, JavaScript (jQuery for AJAX)
 - **CSS Framework:** Bootstrap 5.3
 
@@ -29,14 +29,15 @@ Follow these steps to run the application on your local machine using a server e
    ```
 2. **Move to Server Directory:** 
    Place the cloned `XYZ_Blogs` folder inside your web server's root directory (e.g., `htdocs` for XAMPP or `www` for WAMP).
-3. **Start Apache and MySQL:**
-   Ensure your local server's Apache and MySQL services are actively running.
+3. **Start Apache and PostgreSQL:**
+   Ensure your local server's Apache and PostgreSQL services are actively running, and the `pdo_pgsql` extension is enabled in your `php.ini`.
 4. **Database Configuration:**
-   Open the `config.php` file in the root directory and ensure the credentials match your local MySQL setup (usually `root` with a blank password).
+   Open the `config.php` file in the root directory and ensure the credentials match your local PostgreSQL setup.
    ```php
    define('DB_HOST', 'localhost');
-   define('DB_USER', 'root');
-   define('DB_PASS', '');
+   define('DB_PORT', '5432');
+   define('DB_USER', 'postgres');
+   define('DB_PASS', 'yourpassword');
    define('DB_NAME', 'blog_db');
    ```
 5. **Run Setup Script:**

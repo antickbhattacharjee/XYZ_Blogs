@@ -10,8 +10,8 @@ $error = '';
 $success = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = sanitize($conn, $_POST['username']);
-    $email = sanitize($conn, $_POST['email']);
+    $username = sanitize($_POST['username']);
+    $email = sanitize($_POST['email']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
@@ -22,21 +22,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // Check if username or email exists
         $stmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-        $stmt->bind_param("ss", $username, $email);
-        $stmt->execute();
-        $stmt->store_result();
+        $stmt->execute([$username, $email]);
 
-        if($stmt->num_rows > 0) {
+        if($stmt->rowCount() > 0) {
             $error = "Username or Email already exists.";
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $username, $email, $hashed_password);
 
-            if($stmt->execute()) {
+            if($stmt->execute([$username, $email, $hashed_password])) {
                 $success = "Registration successful. You can now <a href='login.php'>login</a>.";
             } else {
-                $error = "Error: " . $conn->error;
+                $error = "Error creating account.";
             }
         }
     }
